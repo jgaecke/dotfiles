@@ -11,12 +11,9 @@
 "           open vim, then :PluginInstall
 " Contents
 "       Vundle bootstrap
-"           myplugins
 "       General settings
 "       UI config
 "       Key mappings
-"           movement
-"           custom
 "       Plugin settings
 "       Vim scripts
 "       Old config
@@ -65,11 +62,13 @@ Plugin 'tyrannicaltoucan/vim-deep-space' " color
 Plugin 'rakr/vim-one' "color, not term compatible
 
 " CtrlP
-" gundu
 " Airline
+" bufferline
+" fugitive
+
+" gundu
 " tcomment_vim
 " indentLine
-" bufferline
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -142,8 +141,6 @@ execute "set colorcolumn=" . join(range(81,335), ',')
 " Key mappings
 " ======================================
 let mapleader="\<space>"
-
-" movement
 " nnoremap <up> <nop>
 " nnoremap <down> <nop>
 " nnoremap <left> <nop>
@@ -163,8 +160,6 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 nnoremap <tab> %
 vnoremap <tab> %
-
-" buffers and layout
 " open split right
 nnoremap <leader>t <C-w>v<C-w>l
 " open new buffer
@@ -175,7 +170,6 @@ nnoremap <S-k> :bnext<CR>
 nnoremap <S-j> :bprevious<CR>
 " delete current buffer, does not work with splits
 nnoremap <leader>w :bdelete<CR>
-" editing and sourcing .vimrc file
 " nnoremap <leader>evv <C-w><C-v><C-l>:e $MYVIMRC<CR>
 nnoremap <leader>ev :e $MYVIMRC<CR>
 nnoremap <leader>sv :so $MYVIMRC<CR>
@@ -196,21 +190,24 @@ noremap <leader>dd "+dd
 
 " Plugin settings
 " ======================================
+nnoremap <C-o> :NERDTreeToggle ~\<CR>
+
 " command! -nargs=* Wrap setlocal wrap linebreak nolist
 " command! -nargs=* Nowrap setlocal wrap list
-"
-" " Plugin Configurations and Mappings ======
+
 " nnoremap <leader>f :CtrlP C:\Gaecke\ Quant\ Systems\<CR>
 " nnoremap <leader>j :CtrlP C:\users\<CR>
-" " let g:ctrlp_working_path_mode = 'r'
-" nnoremap <C-o> :NERDTreeToggle C:\Gaecke Quant Systems\<CR>
+" let g:ctrlp_working_path_mode = 'r'
+
 " nnoremap <leader>ig :IndentLinesToggle<CR>
 " let g:indentLine_enabled = 0
+" let g:indentLine_char = '|'
 " let g:bufferline_echo = 0
+
 " let g:airline#extensions#tabline#enabled = 1
 " let g:airline#extensions#tabline#fnamemod = ':t'
-" " nnoremap <leader>u :GundoToggle<CR>
-" " let g:indentLine_char = '|'
+
+" nnoremap <leader>u :GundoToggle<CR>
 
 " Vim scripts
 " ======================================
