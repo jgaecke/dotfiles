@@ -197,6 +197,7 @@ exec_always xcape -e 'Caps_Lock=Escape'
 
 exec --no-startup-id compton --config ~/.config/compton.conf -b # fixes screen tearing
 exec --no-startup-id dropbox start
+exec --no-startup-id ssh-agent
 
 # exec_always sh ~/.fehbg & # wallpapers set on new session
 exec_always --no-startup-id feh --bg-scale ~/Downloads/1.jpg
