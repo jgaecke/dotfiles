@@ -187,11 +187,12 @@ map <leader>sp :setlocal spell! spelllang=en_us<CR>
 nnoremap <leader>V V`]
 " re-select inserted text
 nnoremap <leader>v `[v`]
-" pasting behavior for different registeries
+" X11 clipboard use
 noremap <leader>p "*p
 noremap <leader>P "*P
-noremap <leader>y "*y
-noremap <leader>yy "*yy
+noremap <leader>y "+y
+noremap <leader>yy "+yy
+noremap <leader>dd "+dd
 
 " Plugin settings
 " ======================================
