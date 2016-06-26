@@ -5,16 +5,18 @@
 "
 " Readme
 "       Installation
-"               install git
-"               vundle as per official documentation
-"               GNU stow for symlinking
-"               open vim, then :PluginInstall
+"           install git
+"           vundle as per official documentation
+"           GNU stow for symlinking
+"           open vim, then :PluginInstall
 " Contents
 "       Vundle bootstrap
-"           my plugins
+"           myplugins
 "       General settings
 "       UI config
 "       Key mappings
+"           movement
+"           custom
 "       Plugin settings
 "       Vim scripts
 "       Old config
@@ -62,10 +64,8 @@ Plugin 'scrooloose/nerdtree' " in buffer filetree
 Plugin 'tyrannicaltoucan/vim-deep-space' " color
 Plugin 'rakr/vim-one' "color, not term compatible
 
-" Pathogen
 " CtrlP
 " gundu
-" Nerdtree
 " Airline
 " tcomment_vim
 " indentLine
@@ -135,46 +135,15 @@ if has("gui_running")
     set guioptions-=T " remove toolbar
     set lines=250 columns=85 " size of initial window
 endif
-" highlight OverLength ctermbg=darkgreen ctermfg=white guibg=orange guifg=white
-" match OverLength /\%81v.\+/ " highlight 81st character
-" -------------------------------------------------------------------------------------------
 set splitbelow " new splits open on the bottom
 set splitright " new splits open on the right
-
-" highlight trailing whitespace and whitespace after TAB
-" highlight ExtraWhitespace ctermbg=darkgreen guibg=lightgreen
-" match ExtraWhitespace /\s\+$\| \+\ze\t/
-"
-" makes a single color column down the 80th column
-" set colorcolumn=80 " mark the 80th column
-"
-" " creates a colored block in the >81 character space
 execute "set colorcolumn=" . join(range(81,335), ',')
-"
-" highlights only the 81st character not the >=81 characters
-" highlight ColorColumn ctermbg=DarkCyan ctermfg=white guibg=orange
-" guifg=white
-" call matchadd('ColorColumn', '\%81v', 100)
-"
-" This block of code should highlight only the 79th character
-" Currently does not work, need to delete FileType scala, java
-" augroup collumnLimit
-"   autocmd!
-"   autocmd BufEnter,WinEnter,FileType scala,java
-"         \ highlight CollumnLimit ctermbg=DarkGrey guibg=DarkGrey
-"  let collumnLimit = 79 " feel free to customize
-"   let pattern =
-"         \ '\%<' . (collumnLimit+1) . 'v.\%>' . collumnLimit . 'v'
-"   autocmd BufEnter,WinEnter,FileType scala,java
-"         \ let w:m1=matchadd('CollumnLimit', pattern, -1)
-" augroup END
-"
+
 " Key mappings
 " ======================================
-
 let mapleader="\<space>"
 
-" disable the arrow keys to force learning
+" movement
 " nnoremap <up> <nop>
 " nnoremap <down> <nop>
 " nnoremap <left> <nop>
@@ -183,8 +152,6 @@ let mapleader="\<space>"
 " inoremap <down> <nop>
 " inoremap <left> <nop>
 " inoremap <right> <nop>
-
-" navigation and movement
 inoremap jk <esc>
 nnoremap j gj
 nnoremap k gk
@@ -236,35 +203,7 @@ noremap <leader>yy "*yy
 " let g:airline#extensions#tabline#fnamemod = ':t'
 " " nnoremap <leader>u :GundoToggle<CR>
 " " let g:indentLine_char = '|'
-"
-" potential settings and configurations
-" ======================================
-"
-"   set nocompatible " remove backward compatibility with vi
-"   set modelines=0 " removes security exploit with modelines
-"   set gdefault " global substitution instead of first occurence
-"   au FocusLost * :wa " save on focus lost, like when tabbing away
-"
-"   The following remaps such that \v is prefext every search query
-" (regex)
-"   noremap / /\v
-"   vnoremap / /\v
-"
-"   set wrap " text wrapping, what is the difference between hard and
-" soft wrap
-"   set textwidth=79 " related to word wrap
-"   set formatoptions=qrn1 "related to word wrap
-"
-"   save session, reopen with vim -S
-"   nnoremap <leader>s :mksession<CR>
-"
-"   set viminfo+=n$VIM/_viminfo
-"
-" set copyindent " copy previous indention on autoindenting
-" set smarttab "  tabs on start of line according to shiftwidth not
-" tabstop
-" set title
-"
+
 " Vim scripts
 " ======================================
 " Twiddle Case, in Visual Mode ~ to cycle Upper, lower, Title Case
@@ -280,3 +219,42 @@ function! TwiddleCase(str)
 endfunction
 vnoremap ~ y:call setreg('', TwiddleCase(@"), getregtype(''))<CR>gv""Pgv
 
+" Old config
+" ======================================
+" set nocompatible " remove backward compatibility with vi
+" set modelines=0 " removes security exploit with modelines
+" set gdefault " global substitution instead of first occurence
+" au FocusLost * :wa " save on focus lost, like when tabbing away
+"
+" The following remaps such that \v is prefext every search query
+" (regex)
+" noremap / /\v
+" vnoremap / /\v
+"
+" set wrap " text wrapping, what is the difference between hard and
+" soft wrap
+" set textwidth=79 " related to word wrap
+" set formatoptions=qrn1 "related to word wrap
+"
+" save session, reopen with vim -S
+" nnoremap <leader>s :mksession<CR>
+"
+" set viminfo+=n$VIM/_viminfo
+"
+" set copyindent " copy previous indention on autoindenting
+" set smarttab "  tabs on start of line according to shiftwidth not
+" tabstop
+" set title
+"
+" highlight OverLength ctermbg=darkgreen ctermfg=white guibg=orange guifg=white
+" match OverLength /\%81v.\+/ " highlight 81st character
+"
+" Trailing whitespaces and whitespace after TAB are highlight
+" highlight ExtraWhitespace ctermbg=darkgreen guibg=lightgreen
+" match ExtraWhitespace /\s\+$\| \+\ze\t/
+"
+" set colorcolumn=81 " single grey column on column 81
+"
+" highlights only the 81st character not the >=81 characters
+" highlight ColorColumn ctermbg=DarkCyan ctermfg=white guibg=orange guifg=white
+" call matchadd('ColorColumn', '\%81v', 100)
