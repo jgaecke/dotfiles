@@ -1,15 +1,39 @@
+" ======================================
+"
 " Jeff Gaecke
-" Created on 2015-11-10
+" First created on 2015-11-10
+"
+" Readme
+"       Installation
+"               install git
+"               vundle as per official documentation
+"               GNU stow for symlinking
+"               open vim, then :PluginInstall
+" Contents
+"       Vundle bootstrap
+"           my plugins
+"       General settings
+"       UI config
+"       Key mappings
+"       Plugin settings
+"       Vim scripts
+"       Old config
+"
+" Vim related notes
+"
+" ======================================
 
-set nocompatible              " be iMproved, required
-filetype off                  " required
+" Vundle bootstrap
+" ======================================
+set nocompatible " be iMproved, required
+filetype off " required
 
 " set the runtime path to include Vundle and initialize
 " set rtp+=~/.vim/bundle/Vundle.vim
 set rtp+=$HOME/.vim/bundle/Vundle.vim
 call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+" call vundle#begin($HOME/.vim/bundle/Vundle.vim)
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
@@ -31,9 +55,18 @@ Plugin 'VundleVim/Vundle.vim'
 " different version somewhere else.
 " Plugin 'ascenator/L9', {'name': 'newL9'}
 
-Plugin 'scrooloose/nerdtree'
-Plugin 'tyrannicaltoucan/vim-deep-space'
-Plugin 'rakr/vim-one'
+" myplugins
+Plugin 'scrooloose/nerdtree' " in buffer filetree
+Plugin 'tyrannicaltoucan/vim-deep-space' " color
+Plugin 'rakr/vim-one' "color
+" Pathogen
+" CtrlP
+" gundu
+" Nerdtree
+" Airline
+" tcomment_vim
+" indentLine
+" bufferline
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -50,27 +83,14 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
-colorscheme deep-space
-
-" Vim Packages in use ==========================
-" Pathogen
-" CtrlP
-" gundu
-" Nerdtree
-" Airline
-" tcomment_vim
-" indentLine
-" bufferline
-
-" Vim Notes =================================
-
-" Configuration and Settings ============
-" set hidden " hides files when unsaved instead of force save
-set encoding=utf-8 " utf-8 encoding is the most common the web
-filetype indent on " loads filetype specific indent files /vimfiles/indent/
-set tabstop=4 " number of spaces per TAB
+" General settings
+" ======================================
+set hidden " hides unsaved buffer instead of quit
+set encoding=utf-8 " utf-8 encoding is most common the web
+filetype indent on " loads filetype specific indent files /.vim/indent/
+set tabstop=4 " number of spaces per Tab
 set shiftwidth=4 " what does this do???
-set softtabstop=4 " number of spaces per TAB when editing
+set softtabstop=4 " number of spaces per Tab when editing
 set expandtab " tabs are spaces
 set autoindent " copy idention from previous line, when starting new
 set history=1000 " number of lines remembered
@@ -80,7 +100,7 @@ set incsearch " search as characters are entered
 set ignorecase " ignores case when searching
 set smartcase " with ignore on, case sensitive with upper case query
 set hlsearch " highlight matches
-set scrolloff=3 " show minimum of 3 lines above/below searched items
+set scrolloff=2 " show minimum of 3 lines above/below searched items
 set wildmenu "better tab completion in command mode
 " set wildmode=list:longest " first tab completes to common, then cycles
 set ttyfast " performance boost for long lines
@@ -93,7 +113,9 @@ set noerrorbells " suppress errors
 " set backupdir=$HOME\.vim\tmp\\
 " set directory=$HOME\vim\tmp\\
 
-" UI Configuration======================
+" UI configuration======================
+" ======================================
+colorscheme deep-space
 syntax enable " enable syntax highlighting
 " winpos 0 0 " start gvim window in top left corner, doesn't like negatives #s
 " set lines=250 columns=85 " size of initial window
@@ -115,7 +137,8 @@ endif
 set splitbelow
 set splitright
 
-" Key Mappings ===========================
+" Key mappings
+" ======================================
 
 let mapleader="\<space>"
 
@@ -164,10 +187,11 @@ noremap <leader>P "*P
 noremap <leader>y "*y
 noremap <leader>yy "*yy
 
-" " Command changes =====================
+" Plugin settings
+" ======================================
 " command! -nargs=* Wrap setlocal wrap linebreak nolist
 " command! -nargs=* Nowrap setlocal wrap list
-" 
+"
 " " Plugin Configurations and Mappings ======
 " nnoremap <leader>f :CtrlP C:\Gaecke\ Quant\ Systems\<CR>
 " nnoremap <leader>j :CtrlP C:\users\<CR>
@@ -180,49 +204,50 @@ noremap <leader>yy "*yy
 " let g:airline#extensions#tabline#fnamemod = ':t'
 " " nnoremap <leader>u :GundoToggle<CR>
 " " let g:indentLine_char = '|'
-" 
-"   potential settings and configurations ============
-" 
+"
+" potential settings and configurations
+" ======================================
+"
 "   set nocompatible " remove backward compatibility with vi
 "   set modelines=0 " removes security exploit with modelines
 "   set gdefault " global substitution instead of first occurence
 "   au FocusLost * :wa " save on focus lost, like when tabbing away
-" 
+"
 "   The following remaps such that \v is prefext every search query
 " (regex)
 "   noremap / /\v
 "   vnoremap / /\v
-" 
+"
 "   set wrap " text wrapping, what is the difference between hard and
 " soft wrap
 "   set textwidth=79 " related to word wrap
 "   set formatoptions=qrn1 "related to word wrap
-" 
+"
 "   save session, reopen with vim -S
 "   nnoremap <leader>s :mksession<CR>
-" 
+"
 "   set viminfo+=n$VIM/_viminfo
-" 
+"
 "   set copyindent " copy previous indention on autoindenting
 "   set smarttab "  tabs on start of line according to shiftwidth not
 " tabstop
 " " set title
-" 
+"
 " " highlight trailing whitespace and whitespace after TAB
 " " highlight ExtraWhitespace ctermbg=darkgreen guibg=lightgreen
 " " match ExtraWhitespace /\s\+$\| \+\ze\t/
-" 
+"
 " " makes a single color column down the 80th column
 "   set colorcolumn=80 " mark the 80th column
-" 
+"
 " " creates a colored block in the >81 character space
 execute "set colorcolumn=" . join(range(81,335), ',')
-" 
+"
 " " highlights only the 81st character not the >=81 characters
 " " highlight ColorColumn ctermbg=DarkCyan ctermfg=white guibg=orange
 " guifg=white
 " " call matchadd('ColorColumn', '\%81v', 100)
-" 
+"
 " " This block of code should highlight only the 79th character
 " " Currently does not work, need to delete FileType scala, java
 " " augroup collumnLimit
@@ -235,10 +260,12 @@ execute "set colorcolumn=" . join(range(81,335), ',')
 " "   autocmd BufEnter,WinEnter,FileType scala,java
 " "         \ let w:m1=matchadd('CollumnLimit', pattern, -1)
 " " augroup END
-" 
-" 
+"
+" Vim scripts
+" ======================================
+"
 " " Twiddle case, use ~ to toggle through UPPER, lower, Title case
-" 
+"
 " function! TwiddleCase(str)
 "   if a:str ==# toupper(a:str)
 "       let result = tolower(a:str)
