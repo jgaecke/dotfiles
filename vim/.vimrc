@@ -163,19 +163,26 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 nnoremap <tab> %
 vnoremap <tab> %
-" Buffers and layout
+
+" buffers and layout
+" open split right
 nnoremap <leader>t <C-w>v<C-w>l
+" open new buffer
 nnoremap <leader>n :enew<CR>
-nnoremap <C-n> :bnext<CR>
+" move to next buffer
+nnoremap <S-k> :bnext<CR>
+" move to previous buffer
+nnoremap <S-j> :bprevious<CR>
+" delete current buffer, does not work with splits
 nnoremap <leader>w :bdelete<CR>
 " editing and sourcing .vimrc file
-nnoremap <leader>evv <C-w><C-v><C-l>:e $MYVIMRC<CR>
+" nnoremap <leader>evv <C-w><C-v><C-l>:e $MYVIMRC<CR>
 nnoremap <leader>ev :e $MYVIMRC<CR>
 nnoremap <leader>sv :so $MYVIMRC<CR>
 " editing and searching
 nnoremap <leader>sw :%s/\s\+$//<cr>:let @/=''<CR>
 nnoremap <leader>h :nohlsearch<CR>
-map <leader>spell :setlocal spell! spelllang=en_us<CR>
+map <leader>sp :setlocal spell! spelllang=en_us<CR>
 " re-select pasted text
 nnoremap <leader>V V`]
 " re-select inserted text
