@@ -20,6 +20,8 @@
 "       Old config
 "
 " Vim related notes
+"      -pay special attention to difference in filepaths between
+"       windows and *nix
 "
 " ======================================
 
@@ -58,7 +60,8 @@ Plugin 'VundleVim/Vundle.vim'
 " myplugins
 Plugin 'scrooloose/nerdtree' " in buffer filetree
 Plugin 'tyrannicaltoucan/vim-deep-space' " color
-Plugin 'rakr/vim-one' "color
+Plugin 'rakr/vim-one' "color, not term compatible
+
 " Pathogen
 " CtrlP
 " gundu
@@ -93,6 +96,7 @@ set shiftwidth=4 " what does this do???
 set softtabstop=4 " number of spaces per Tab when editing
 set expandtab " tabs are spaces
 set autoindent " copy idention from previous line, when starting new
+set backspace=indent,eol,start "backspace in i-mode more natural
 set history=1000 " number of lines remembered
 set undolevels=1000 " number of undo's remembered
 set mouse=a " enable all mouse functions
@@ -100,43 +104,71 @@ set incsearch " search as characters are entered
 set ignorecase " ignores case when searching
 set smartcase " with ignore on, case sensitive with upper case query
 set hlsearch " highlight matches
-set scrolloff=2 " show minimum of 3 lines above/below searched items
+set scrolloff=3 " show minimum of 3 lines above/below searched items
 set wildmenu "better tab completion in command mode
 " set wildmode=list:longest " first tab completes to common, then cycles
 set ttyfast " performance boost for long lines
 set lazyredraw " performance boost for lowering redraw rate
-set backspace=indent,eol,start "backspace in i-mode more natural
 set visualbell " screen flashes instead of beeps
 set noerrorbells " suppress errors
-" set undofile " creates a <FILENAME>.un file to save undo information
-" set undodir=$HOME\.vim\tmp\\
-" set backupdir=$HOME\.vim\tmp\\
-" set directory=$HOME\vim\tmp\\
+set undofile " creates a <FILENAME>.un file to save undo information
+set undodir=$HOME/.vim/tmp// " make sure to create tmp file, // prepends name
+set backupdir=$HOME/.vim/tmp// " ~files to tmp
+set directory=$HOME/.vim/tmp// " swap files to tmp
 
-" UI configuration======================
+" UI config
 " ======================================
 colorscheme deep-space
 syntax enable " enable syntax highlighting
-" winpos 0 0 " start gvim window in top left corner, doesn't like negatives #s
-" set lines=250 columns=85 " size of initial window
+winpos 0 0 " start gvim window in top left corner, doesn't like negatives #s
 set ruler " display line and column number in bottom ruler
 set number " display the line number
 set relativenumber " display relative to cursor not absolute
 set cursorline " highlight the current line
 set list listchars=tab:>\ ,trail:·,extends:»,precedes:«,eol:¬,nbsp:×
 set laststatus=2 " always show status line
-set showcmd " show command in bottom ruler
+set showcmd " always show command line
 set showmode "show mode in bottom ruler
 set showmatch " highlight matching [{()}]
 if has("gui_running")
-    set guifont=Consolas:h10:cDEFAULT " font and size
+    set guifont=Consolas:h10:cDEFAULT " font for gvim
     set guioptions-=T " remove toolbar
+    set lines=250 columns=85 " size of initial window
 endif
 " highlight OverLength ctermbg=darkgreen ctermfg=white guibg=orange guifg=white
 " match OverLength /\%81v.\+/ " highlight 81st character
-set splitbelow
-set splitright
+" -------------------------------------------------------------------------------------------
+set splitbelow " new splits open on the bottom
+set splitright " new splits open on the right
 
+" highlight trailing whitespace and whitespace after TAB
+" highlight ExtraWhitespace ctermbg=darkgreen guibg=lightgreen
+" match ExtraWhitespace /\s\+$\| \+\ze\t/
+"
+" makes a single color column down the 80th column
+" set colorcolumn=80 " mark the 80th column
+"
+" " creates a colored block in the >81 character space
+execute "set colorcolumn=" . join(range(81,335), ',')
+"
+" highlights only the 81st character not the >=81 characters
+" highlight ColorColumn ctermbg=DarkCyan ctermfg=white guibg=orange
+" guifg=white
+" call matchadd('ColorColumn', '\%81v', 100)
+"
+" This block of code should highlight only the 79th character
+" Currently does not work, need to delete FileType scala, java
+" augroup collumnLimit
+"   autocmd!
+"   autocmd BufEnter,WinEnter,FileType scala,java
+"         \ highlight CollumnLimit ctermbg=DarkGrey guibg=DarkGrey
+"  let collumnLimit = 79 " feel free to customize
+"   let pattern =
+"         \ '\%<' . (collumnLimit+1) . 'v.\%>' . collumnLimit . 'v'
+"   autocmd BufEnter,WinEnter,FileType scala,java
+"         \ let w:m1=matchadd('CollumnLimit', pattern, -1)
+" augroup END
+"
 " Key mappings
 " ======================================
 
@@ -228,53 +260,23 @@ noremap <leader>yy "*yy
 "
 "   set viminfo+=n$VIM/_viminfo
 "
-"   set copyindent " copy previous indention on autoindenting
-"   set smarttab "  tabs on start of line according to shiftwidth not
+" set copyindent " copy previous indention on autoindenting
+" set smarttab "  tabs on start of line according to shiftwidth not
 " tabstop
-" " set title
-"
-" " highlight trailing whitespace and whitespace after TAB
-" " highlight ExtraWhitespace ctermbg=darkgreen guibg=lightgreen
-" " match ExtraWhitespace /\s\+$\| \+\ze\t/
-"
-" " makes a single color column down the 80th column
-"   set colorcolumn=80 " mark the 80th column
-"
-" " creates a colored block in the >81 character space
-execute "set colorcolumn=" . join(range(81,335), ',')
-"
-" " highlights only the 81st character not the >=81 characters
-" " highlight ColorColumn ctermbg=DarkCyan ctermfg=white guibg=orange
-" guifg=white
-" " call matchadd('ColorColumn', '\%81v', 100)
-"
-" " This block of code should highlight only the 79th character
-" " Currently does not work, need to delete FileType scala, java
-" " augroup collumnLimit
-" "   autocmd!
-" "   autocmd BufEnter,WinEnter,FileType scala,java
-" "         \ highlight CollumnLimit ctermbg=DarkGrey guibg=DarkGrey
-"    let collumnLimit = 79 " feel free to customize
-" "   let pattern =
-" "         \ '\%<' . (collumnLimit+1) . 'v.\%>' . collumnLimit . 'v'
-" "   autocmd BufEnter,WinEnter,FileType scala,java
-" "         \ let w:m1=matchadd('CollumnLimit', pattern, -1)
-" " augroup END
+" set title
 "
 " Vim scripts
 " ======================================
-"
-" " Twiddle case, use ~ to toggle through UPPER, lower, Title case
-"
-" function! TwiddleCase(str)
-"   if a:str ==# toupper(a:str)
-"       let result = tolower(a:str)
-"         elseif a:str ==# tolower(a:str)
-"             let result = substitute(a:str,'\(\<\w\+\>\)', '\u\1', 'g')
-"               else
-"                   let result = toupper(a:str)
-"                     endif
-"                       return result
-"                       endfunction
-"                       vnoremap ~ y:call setreg('', TwiddleCase(@"),
-"                       getregtype(''))<CR>gv""Pgv
+" Twiddle Case, in Visual Mode ~ to cycle Upper, lower, Title Case
+function! TwiddleCase(str)
+    if a:str ==# toupper(a:str)
+        let result = tolower(a:str)
+    elseif a:str ==# tolower(a:str)
+        let result = substitute(a:str,'\(\<\w\+\>\)','\u\1','g')
+    else
+        let result = toupper(a:str)
+    endif
+    return result
+endfunction
+vnoremap ~ y:call setreg('', TwiddleCase(@"), getregtype(''))<CR>gv""Pgv
+
