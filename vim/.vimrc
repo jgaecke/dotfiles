@@ -4,7 +4,7 @@
 " First created on 2015-11-10
 "
 " Readme
-"       Installation
+"       Installation Instructions
 "           install git
 "           vundle as per official documentation
 "           GNU stow for symlinking
@@ -70,13 +70,17 @@ Plugin 'tpope/vim-commentary' " us gcc for line
 Plugin 'mbbill/undotree' " visual undo tree
 Plugin 'airblade/vim-gitgutter' " shows git changes in sign column
 " Color Themes
-Plugin 'tyrannicaltoucan/vim-deep-space' " color
-Plugin 'altercation/vim-colors-solarized' " color, specify term comp
-Plugin 'w0ng/vim-hybrid' "color, set background dark
+Plugin 'tyrannicaltoucan/vim-deep-space' " color, 256
+Plugin 'w0ng/vim-hybrid' "color, dark and light, 256, can be transparent
+Plugin 'altercation/vim-colors-solarized' " color, not term compatible
 Plugin 'nanotech/jellybeans.vim' "color, can be transparent
-" interesting plugins
-" gitgutter "puts sign for modified lines, added, deleted, etc.
+Plugin 'sickill/vim-monokai' " ported from textmate's theme
+Plugin 'tomasr/molokai' " revised version, let g:rehash256 = 1
+Plugin 'sjl/badwolf' " color
+" Interesting plugins
 " syntastic " syntax checker
+" vim-surround for adding {} [] ()
+" ack.vim for searching codebase very quickly
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -128,8 +132,8 @@ set completeopt=menu,preview
 
 " UI config
 " ======================================
-" set background=dark
-colorscheme deep-space
+set background=dark
+colorscheme hybrid
 syntax enable " enable syntax highlighting
 winpos 0 0 " start gvim window in top left corner, doesn't like negatives #s
 set ruler " display line and column number in bottom ruler
@@ -154,7 +158,8 @@ if has("gui_running")
 endif
 set splitbelow " new splits open on the bottom
 set splitright " new splits open on the right
-execute "set colorcolumn=" . join(range(81,335), ',')
+" execute "set colorcolumn=" . join(range(81,335), ',')
+set colorcolumn=81 " single grey column on column 81
 
 " Key mappings
 " ======================================
@@ -178,7 +183,7 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 nnoremap <tab> %
 vnoremap <tab> %
-" open new buffer
+" buffers
 nnoremap <leader>t :enew<CR>
 nnoremap <leader>x :bdelete<CR>
 nnoremap <S-k> :bnext<CR>
@@ -204,9 +209,8 @@ nnoremap <leader>dd "+dd
 " ======================================
 nnoremap <C-o> :NERDTreeToggle <CR>
 nnoremap <leader>u :UndotreeToggle<CR>
-
 let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme='tomorrow'
+let g:airline_theme='base16_tomorrow'
 " need to install powerline for the following to work
 " let g:airline_powerline_fonts = 1
 " not sure what this does
@@ -214,10 +218,6 @@ let g:airline_theme='tomorrow'
 
 " command! -nargs=* Wrap setlocal wrap linebreak nolist
 " command! -nargs=* Nowrap setlocal wrap list
-
-" let g:ctrlp_working_path_mode = 'r'
-" nnoremap <leader>f :CtrlP C:\Gaecke\ Quant\ Systems\<CR>
-" nnoremap <leader>j :CtrlP C:\users\<CR>
 
 " Vim functions
 " ======================================
@@ -239,6 +239,7 @@ vnoremap ~ y:call setreg('', TwiddleCase(@"), getregtype(''))<CR>gv""Pgv
 " set nocompatible " remove backward compatibility with vi
 " set modelines=0 " removes security exploit with modelines
 " set gdefault " global substitution instead of first occurence
+
 " au FocusLost * :wa " save on focus lost, like when tabbing away
 "
 " The following remaps such that \v is prefext every search query
@@ -267,8 +268,6 @@ vnoremap ~ y:call setreg('', TwiddleCase(@"), getregtype(''))<CR>gv""Pgv
 " Trailing whitespaces and whitespace after TAB are highlight
 " highlight ExtraWhitespace ctermbg=darkgreen guibg=lightgreen
 " match ExtraWhitespace /\s\+$\| \+\ze\t/
-"
-" set colorcolumn=81 " single grey column on column 81
 "
 " highlights only the 81st character not the >=81 characters
 " highlight ColorColumn ctermbg=DarkCyan ctermfg=white guibg=orange guifg=white
