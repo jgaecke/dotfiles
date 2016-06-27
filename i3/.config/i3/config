@@ -192,6 +192,7 @@ focus_follows_mouse no # mouse movement does not interefere
 exec_always setxkbmap -option 'caps:ctrl_modifier'
 exec_always xcape -e 'Caps_Lock=Escape'
 
+# why this script for screen tearing?
 exec --no-startup-id compton --config ~/.config/compton.conf -b # fixes screen tearing
 exec --no-startup-id dropbox start
 exec --no-startup-id ssh-agent
@@ -217,7 +218,7 @@ bindsym $mod+Shift+Tab move container to workspace next
 # exec --no-startup-id synclient "HorizTwoFingerScroll" "On"
 # exec --no-startup-id synclient VertScrollDelta=-30 HorizScrollDelta=-90
 
-# Pulse Audio controls
+# Pulse Audio controls alsamixer is an alternative
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 1 +5% && pactl set-sink-mute 1 0
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 1 -5% && pactl set-sink-mute 1 0
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 1 toggle
@@ -278,7 +279,7 @@ mode "$mode_gaps_outer" {
         bindsym Escape mode "default"
 }
 
-# Lock, Suspend, Hibernate, Shutdown, Reboot
+# Lock, Suspend, Hibernate, Shutdown, Reboot with i3lock-fancy
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
     bindsym l exec --no-startup-id sh ~/.config/i3/i3exit lock, mode "default"
