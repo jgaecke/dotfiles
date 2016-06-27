@@ -60,19 +60,21 @@ Plugin 'VundleVim/Vundle.vim'
 " Plugin 'ascenator/L9', {'name': 'newL9'}
 
 " myplugins
-Plugin 'vim-airline/vim-airline' " in buffer filetree
+Plugin 'vim-airline/vim-airline' " powerline like status line
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'tpope/vim-fugitive' " git wrapper
 Plugin 'scrooloose/nerdtree' " in buffer filetree
 Plugin 'tyrannicaltoucan/vim-deep-space' " color
-Plugin 'rakr/vim-one' "color, not term compatible
+Plugin 'rakr/vim-one' "color, not term comp
+Plugin 'altercation/vim-colors-solarized' " color, specify term comp
 
 " CtrlP
-" Airline
-" fugitive " git wrapper
+" undotree
+
 " gitgutter "puts sign for modified lines, added, deleted, etc.
 " syntastic " syntax checker
 
 " bufferline
-" gundu
 " tcomment_vim
 " indentLine
 
@@ -119,8 +121,7 @@ set undofile " creates a <FILENAME>.un file to save undo information
 set undodir=$HOME/.vim/tmp// " make sure to create tmp file, // prepends name
 set backupdir=$HOME/.vim/tmp// " ~files to tmp
 set directory=$HOME/.vim/tmp// " swap files to tmp
-" remap tab for tab completion
-imap <Tab> <C-P>
+" imap <Tab> <C-P>
 " pull completions from current file, buffers, current tags
 set complete=.,b,u,]
 set completeopt=menu,preview
@@ -142,6 +143,8 @@ set showmatch " highlight matching [{()}]
 if has("gui_running")
     set guioptions-=T " remove toolbar
     " set lines=250 columns=85 " size of initial window
+    set background=dark
+    colorscheme solarized
     if has('gui_win32')
         set guifont=DejaVu_Sans_Mono:h11:cANSI
     else
@@ -199,12 +202,11 @@ noremap <leader>dd "+dd
 
 " Plugin settings
 " ======================================
-nnoremap <C-o> :NERDTreeToggle ~\<CR>
-
+nnoremap <C-o> :NERDTreeToggle <CR>
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '|'
-
+let g:airline_theme='tomorrow'
+" need to install powerline for the following to work
+" let g:airline_powerline_fonts = 1
 " let g:airline#extensions#tabline#fnamemod = ':t'
 
 " command! -nargs=* Wrap setlocal wrap linebreak nolist
