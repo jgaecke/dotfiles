@@ -15,7 +15,7 @@
 "       UI config
 "       Key mappings
 "       Plugin settings
-"       Vim scripts
+"       Vim functions
 "       Old config
 "
 " Vim related notes
@@ -24,6 +24,7 @@
 "      -folding
 "      -split right <C-v>
 "      -split down <C-s>
+"      -comment a paragraph gcap
 "
 " ======================================
 
@@ -63,14 +64,17 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'vim-airline/vim-airline' " powerline like status line
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'ctrlpvim/ctrlp.vim' " fuzzy file, buffer, recent files search
-Plugin 'tpope/vim-fugitive' " git wrapper
 Plugin 'scrooloose/nerdtree' " in buffer filetree
+Plugin 'tpope/vim-fugitive' " git wrapper
+Plugin 'tpope/vim-commentary' " us gcc for line
+Plugin 'mbbill/undotree' " visual undo tree
+Plugin 'airblade/vim-gitgutter' " shows git changes in sign column
+" Color Themes
 Plugin 'tyrannicaltoucan/vim-deep-space' " color
-Plugin 'rakr/vim-one' "color, not term comp
 Plugin 'altercation/vim-colors-solarized' " color, specify term comp
-
-" undotree
-" tpope/vim surround
+Plugin 'w0ng/vim-hybrid' "color, set background dark
+Plugin 'nanotech/jellybeans.vim' "color, can be transparent
+" interesting plugins
 " gitgutter "puts sign for modified lines, added, deleted, etc.
 " syntastic " syntax checker
 
@@ -124,6 +128,7 @@ set completeopt=menu,preview
 
 " UI config
 " ======================================
+" set background=dark
 colorscheme deep-space
 syntax enable " enable syntax highlighting
 winpos 0 0 " start gvim window in top left corner, doesn't like negatives #s
@@ -137,8 +142,8 @@ set showcmd " always show command line
 set showmode "show mode in bottom ruler
 set showmatch " highlight matching [{()}]
 if has("gui_running")
-    set guioptions-=T " remove toolbar
     " set lines=250 columns=85 " size of initial window
+    set guioptions-=T " remove toolbar
     set background=dark
     colorscheme solarized
     if has('gui_win32')
@@ -178,48 +183,43 @@ nnoremap <leader>t :enew<CR>
 nnoremap <leader>x :bdelete<CR>
 nnoremap <S-k> :bnext<CR>
 nnoremap <S-j> :bprevious<CR>
-" nnoremap <leader>evv <C-w><C-v><C-l>:e $MYVIMRC<CR>
+" editing and searching
 nnoremap <leader>ev :e $MYVIMRC<CR>
 nnoremap <leader>sv :so $MYVIMRC<CR>
-" editing and searching
 nnoremap <leader>sw :%s/\s\+$//<cr>:let @/=''<CR>
 nnoremap <leader>h :nohlsearch<CR>
-map <leader>sp :setlocal spell! spelllang=en_us<CR>
+nnoremap <leader>sp :setlocal spell! spelllang=en_us<CR>
 " re-select pasted text
 nnoremap <leader>V V`]
 " re-select inserted text
 nnoremap <leader>v `[v`]
 " X11 clipboard use
-noremap <leader>p "*p
-noremap <leader>P "*P
-noremap <leader>y "+y
-noremap <leader>yy "+yy
-noremap <leader>dd "+dd
+nnoremap <leader>p "*p
+nnoremap <leader>P "*P
+nnoremap <leader>y "+y
+nnoremap <leader>yy "+yy
+nnoremap <leader>dd "+dd
 
 " Plugin settings
 " ======================================
 nnoremap <C-o> :NERDTreeToggle <CR>
+nnoremap <leader>u :UndotreeToggle<CR>
+
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme='tomorrow'
 " need to install powerline for the following to work
 " let g:airline_powerline_fonts = 1
+" not sure what this does
 " let g:airline#extensions#tabline#fnamemod = ':t'
 
 " command! -nargs=* Wrap setlocal wrap linebreak nolist
 " command! -nargs=* Nowrap setlocal wrap list
 
+" let g:ctrlp_working_path_mode = 'r'
 " nnoremap <leader>f :CtrlP C:\Gaecke\ Quant\ Systems\<CR>
 " nnoremap <leader>j :CtrlP C:\users\<CR>
-" let g:ctrlp_working_path_mode = 'r'
 
-" nnoremap <leader>ig :IndentLinesToggle<CR>
-" let g:indentLine_enabled = 0
-" let g:indentLine_char = '|'
-" let g:bufferline_echo = 0
-
-" nnoremap <leader>u :GundoToggle<CR>
-
-" Vim scripts
+" Vim functions
 " ======================================
 " Twiddle Case, in Visual Mode ~ to cycle Upper, lower, Title Case
 function! TwiddleCase(str)
