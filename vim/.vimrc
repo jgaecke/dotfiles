@@ -62,21 +62,17 @@ Plugin 'VundleVim/Vundle.vim'
 " myplugins
 Plugin 'vim-airline/vim-airline' " powerline like status line
 Plugin 'vim-airline/vim-airline-themes'
+Plugin 'ctrlpvim/ctrlp.vim' " fuzzy file, buffer, recent files search
 Plugin 'tpope/vim-fugitive' " git wrapper
 Plugin 'scrooloose/nerdtree' " in buffer filetree
 Plugin 'tyrannicaltoucan/vim-deep-space' " color
 Plugin 'rakr/vim-one' "color, not term comp
 Plugin 'altercation/vim-colors-solarized' " color, specify term comp
 
-" CtrlP
 " undotree
-
+" tpope/vim surround
 " gitgutter "puts sign for modified lines, added, deleted, etc.
 " syntastic " syntax checker
-
-" bufferline
-" tcomment_vim
-" indentLine
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
