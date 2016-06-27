@@ -109,8 +109,7 @@ set ignorecase " ignores case when searching
 set smartcase " with ignore on, case sensitive with upper case query
 set hlsearch " highlight matches
 set scrolloff=3 " show minimum of 3 lines above/below searched items
-set wildmenu "better tab completion in command mode
-" set wildmode=list:longest " first tab completes to common, then cycles
+set wildmode=longest,list:longest " first tab completes to common, then cycles
 set ttyfast " performance boost for long lines
 set lazyredraw " performance boost for lowering redraw rate
 set visualbell " screen flashes instead of beeps
@@ -119,6 +118,11 @@ set undofile " creates a <FILENAME>.un file to save undo information
 set undodir=$HOME/.vim/tmp// " make sure to create tmp file, // prepends name
 set backupdir=$HOME/.vim/tmp// " ~files to tmp
 set directory=$HOME/.vim/tmp// " swap files to tmp
+" remap tab for tab completion
+imap <Tab> <C-P>
+" pull completions from current file, buffers, current tags
+set complete=.,b,u,]
+set completeopt=menu,preview
 
 " UI config
 " ======================================
