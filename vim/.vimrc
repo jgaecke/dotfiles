@@ -135,9 +135,13 @@ set showcmd " always show command line
 set showmode "show mode in bottom ruler
 set showmatch " highlight matching [{()}]
 if has("gui_running")
-    set guifont=Consolas:h10:cDEFAULT " font for gvim
     set guioptions-=T " remove toolbar
-    set lines=250 columns=85 " size of initial window
+    " set lines=250 columns=85 " size of initial window
+    if has('gui_win32')
+        set guifont=DejaVu_Sans_Mono:h11:cANSI
+    else
+        set guifont=DejaVu\ Sans\ Mono\ 11
+    endif
 endif
 set splitbelow " new splits open on the bottom
 set splitright " new splits open on the right
