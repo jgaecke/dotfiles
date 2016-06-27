@@ -208,7 +208,7 @@ bindsym $mod+o scratchpad show
 # remember last used workspace
 workspace_auto_back_and_forth yes
 
-# tab through workspaces
+# tab through workspaces and remember last workspace
 bindsym $mod+Tab workspace next
 bindsym $mod+Shift+Tab move container to workspace next
 
@@ -226,13 +226,6 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 1 toggle
 bindsym XF86MonBrightnessUp exec xbacklight -inc 10
 bindsym XF86MonBrightnessDown exec xbacklight -dec 10
 
-
-# Media player controls
-# bindsym XF86AudioPlay exec --no-startup-id mpc toggle
-# bindsym XF86AudioPause exec --no-startup-id mpc pause
-# bindsym XF86AudioNext exec --no-startup-id mpc next
-# bindsym XF86AudioPrev exec --no-startup-id mpc previous
-
 # Media player controls
 # bindsym XF86AudioPlay exec playerctl play
 # bindsym XF86AudioPause exec playerctl pause
@@ -242,12 +235,10 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 10
 # Touchpad controls
 # bindsym XF86TouchpadToggle exec /some/path/toggletouchpad.sh # toggle touchpad
 
-# Toggle Keyboard
-
-# i3 gaps
+# i3-gaps
 gaps inner 10
 # gaps outer 10
-for_window [class="^.*"] border pixel 3 # disable title bars for gaps
+for_window [class="^.*"] border pixel 3 # disable title bars for gaps required
 smart_borders on # draws borders when multiple containers
 
 set $mode_gaps Gaps: (o) outer, (i) inner
