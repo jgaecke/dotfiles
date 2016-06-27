@@ -60,6 +60,7 @@ Plugin 'VundleVim/Vundle.vim'
 " Plugin 'ascenator/L9', {'name': 'newL9'}
 
 " myplugins
+Plugin 'vim-airline/vim-airline' " in buffer filetree
 Plugin 'scrooloose/nerdtree' " in buffer filetree
 Plugin 'tyrannicaltoucan/vim-deep-space' " color
 Plugin 'rakr/vim-one' "color, not term compatible
@@ -174,13 +175,10 @@ nnoremap <C-l> <C-w>l
 nnoremap <tab> %
 vnoremap <tab> %
 " open new buffer
-nnoremap <leader>n :enew<CR>
-" move to next buffer
+nnoremap <leader>t :enew<CR>
+nnoremap <leader>x :bdelete<CR>
 nnoremap <S-k> :bnext<CR>
-" move to previous buffer
 nnoremap <S-j> :bprevious<CR>
-" delete current buffer, does not work with splits
-nnoremap <leader>w :bdelete<CR>
 " nnoremap <leader>evv <C-w><C-v><C-l>:e $MYVIMRC<CR>
 nnoremap <leader>ev :e $MYVIMRC<CR>
 nnoremap <leader>sv :so $MYVIMRC<CR>
@@ -203,6 +201,12 @@ noremap <leader>dd "+dd
 " ======================================
 nnoremap <C-o> :NERDTreeToggle ~\<CR>
 
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+
+" let g:airline#extensions#tabline#fnamemod = ':t'
+
 " command! -nargs=* Wrap setlocal wrap linebreak nolist
 " command! -nargs=* Nowrap setlocal wrap list
 
@@ -214,9 +218,6 @@ nnoremap <C-o> :NERDTreeToggle ~\<CR>
 " let g:indentLine_enabled = 0
 " let g:indentLine_char = '|'
 " let g:bufferline_echo = 0
-
-" let g:airline#extensions#tabline#enabled = 1
-" let g:airline#extensions#tabline#fnamemod = ':t'
 
 " nnoremap <leader>u :GundoToggle<CR>
 
