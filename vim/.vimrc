@@ -21,6 +21,9 @@
 " Vim related notes
 "      -pay special attention to difference in filepaths between
 "       windows and *nix
+"      -folding
+"      -split right <C-v>
+"      -split down <C-s>
 "
 " ======================================
 
@@ -63,9 +66,11 @@ Plugin 'rakr/vim-one' "color, not term compatible
 
 " CtrlP
 " Airline
-" bufferline
-" fugitive
+" fugitive " git wrapper
+" gitgutter "puts sign for modified lines, added, deleted, etc.
+" syntastic " syntax checker
 
+" bufferline
 " gundu
 " tcomment_vim
 " indentLine
@@ -92,7 +97,7 @@ set encoding=utf-8 " utf-8 encoding is most common the web
 filetype indent on " loads filetype specific indent files /.vim/indent/
 set tabstop=4 " number of spaces per Tab
 set shiftwidth=4 " what does this do???
-set softtabstop=4 " number of spaces per Tab when editing
+set softtabstop=4 " number of spaces that count when editing
 set expandtab " tabs are spaces
 set autoindent " copy idention from previous line, when starting new
 set backspace=indent,eol,start "backspace in i-mode more natural
@@ -160,8 +165,6 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 nnoremap <tab> %
 vnoremap <tab> %
-" open split right
-nnoremap <leader>t <C-w>v<C-w>l
 " open new buffer
 nnoremap <leader>n :enew<CR>
 " move to next buffer
