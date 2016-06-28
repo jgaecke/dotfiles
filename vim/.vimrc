@@ -5,10 +5,14 @@
 "
 " Readme
 "       Installation Instructions
-"           install git
-"           vundle as per official documentation
-"           GNU stow for symlinking
-"           open vim, then :PluginInstall
+"               install git
+"               clone to ~/dotfiles
+"               install vundle as per official doc
+"               make ~/.vim/tmp
+"               Stow for symlinking
+"               open vim, then :PluginInstall
+"               source ~/.vimrc
+"       Note differences in win and *nix filepaths
 " Contents
 "       Vundle bootstrap
 "       General settings
@@ -17,14 +21,14 @@
 "       Plugin settings
 "       Vim functions
 "       Old config
-"
-" Vim related notes
-"      -pay special attention to difference in filepaths between
-"       windows and *nix
-"      -folding
-"      -split right <C-v>
-"      -split down <C-s>
-"      -comment a paragraph gcap
+" Notes
+"       text folding
+"       split right <C-v>, split down <C-s>
+"       comment a paragraph gcap
+"       {} to navigate paragraphs, () for sentences
+"       use relative numbers + jk for faster scrolling
+" todo
+"       learn and incorporate tmux
 "
 " ======================================
 
@@ -62,25 +66,24 @@ Plugin 'VundleVim/Vundle.vim'
 
 " myplugins
 Plugin 'vim-airline/vim-airline' " powerline like status line
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'ctrlpvim/ctrlp.vim' " fuzzy file, buffer, recent files search
-Plugin 'scrooloose/nerdtree' " in buffer filetree
+Plugin 'vim-airline/vim-airline-themes' " themes for airline
+Plugin 'ctrlpvim/ctrlp.vim' " fuzzy search for file, buffer, recent
+Plugin 'scrooloose/nerdtree' " in buffer file tree
 Plugin 'tpope/vim-fugitive' " git wrapper
-Plugin 'tpope/vim-commentary' " us gcc for line
+Plugin 'tpope/vim-commentary' " us gcc for toggling comments in a line
 Plugin 'mbbill/undotree' " visual undo tree
 Plugin 'airblade/vim-gitgutter' " shows git changes in sign column
-" Color Themes
-Plugin 'tyrannicaltoucan/vim-deep-space' " color, 256
-Plugin 'w0ng/vim-hybrid' "color, dark and light, 256, can be transparent
-Plugin 'altercation/vim-colors-solarized' " color, not term compatible
-Plugin 'nanotech/jellybeans.vim' "color, can be transparent
+" Colors
+Plugin 'tyrannicaltoucan/vim-deep-space' " 256 and gui
+Plugin 'w0ng/vim-hybrid' "dark and light, 256 and gui, can be transparent
+Plugin 'altercation/vim-colors-solarized' " gui only, check github for 256
+Plugin 'nanotech/jellybeans.vim' "can be transparent
 Plugin 'sickill/vim-monokai' " ported from textmate's theme
 Plugin 'tomasr/molokai' " revised version, let g:rehash256 = 1
-Plugin 'sjl/badwolf' " color
-" Interesting plugins
-" syntastic " syntax checker
-" vim-surround for adding {} [] ()
-" ack.vim for searching codebase very quickly
+Plugin 'sjl/badwolf' " gui
+" syntastic
+" vim-surround
+" ack.vim
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -99,13 +102,13 @@ filetype plugin indent on    " required
 
 " General settings
 " ======================================
-set hidden " hides unsaved buffer instead of quit
 set encoding=utf-8 " utf-8 encoding is most common the web
+set hidden " hides unsaved buffer instead of quit
 filetype indent on " loads filetype specific indent files /.vim/indent/
-set tabstop=4 " number of spaces per Tab
-set shiftwidth=4 " what does this do???
-set softtabstop=4 " number of spaces that count when editing
 set expandtab " tabs are spaces
+set tabstop=4 " number of spaces per tab
+set softtabstop=4 " number of spaces that count when editing
+set shiftwidth=4 " number of columns text is indenet with reindent or auto
 set autoindent " copy idention from previous line, when starting new
 set backspace=indent,eol,start "backspace in i-mode more natural
 set history=1000 " number of lines remembered
@@ -114,28 +117,26 @@ set mouse=a " enable all mouse functions
 set incsearch " search as characters are entered
 set ignorecase " ignores case when searching
 set smartcase " with ignore on, case sensitive with upper case query
-set hlsearch " highlight matches
 set scrolloff=3 " show minimum of 3 lines above/below searched items
 set wildmode=longest,list:longest " first tab completes to common, then cycles
 set ttyfast " performance boost for long lines
 set lazyredraw " performance boost for lowering redraw rate
 set visualbell " screen flashes instead of beeps
 set noerrorbells " suppress errors
-set undofile " creates a <FILENAME>.un file to save undo information
-set undodir=$HOME/.vim/tmp// " make sure to create tmp file, // prepends name
+set undofile " creates a <file.un> with undo information
+set undodir=$HOME/.vim/tmp// " make sure to create tmp file, // prepends dir
 set backupdir=$HOME/.vim/tmp// " ~files to tmp
 set directory=$HOME/.vim/tmp// " swap files to tmp
-" imap <Tab> <C-P>
-" pull completions from current file, buffers, current tags
-set complete=.,b,u,]
-set completeopt=menu,preview
+" imap <Tab> <C-P> " remap tab to most basic autocomplete function
+set complete=.,b,u,] " autocomplete searches current file, buffers, tags
+set completeopt=menu,preview "autocomplete window behavior
 
 " UI config
 " ======================================
-set background=dark
 colorscheme hybrid
+set background=dark "necesarry for colorschemes with two versions
 syntax enable " enable syntax highlighting
-winpos 0 0 " start gvim window in top left corner, doesn't like negatives #s
+winpos 0 0 " start gui window in top left corner, no negatives
 set ruler " display line and column number in bottom ruler
 set number " display the line number
 set relativenumber " display relative to cursor not absolute
@@ -144,7 +145,12 @@ set list listchars=tab:>\ ,trail:·,extends:»,precedes:«,eol:¬,nbsp:×
 set laststatus=2 " always show status line
 set showcmd " always show command line
 set showmode "show mode in bottom ruler
+set hlsearch " highlight matches when searching
 set showmatch " highlight matching [{()}]
+set splitbelow " splits open on the bottom
+set splitright " splits open on the right
+" execute "set colorcolumn=" . join(range(81,335), ',')
+set colorcolumn=81 " single grey column on column 81
 if has("gui_running")
     " set lines=250 columns=85 " size of initial window
     set guioptions-=T " remove toolbar
@@ -156,10 +162,6 @@ if has("gui_running")
         set guifont=DejaVu\ Sans\ Mono\ 11
     endif
 endif
-set splitbelow " new splits open on the bottom
-set splitright " new splits open on the right
-" execute "set colorcolumn=" . join(range(81,335), ',')
-set colorcolumn=81 " single grey column on column 81
 
 " Key mappings
 " ======================================
@@ -247,8 +249,7 @@ vnoremap ~ y:call setreg('', TwiddleCase(@"), getregtype(''))<CR>gv""Pgv
 " noremap / /\v
 " vnoremap / /\v
 "
-" set wrap " text wrapping, what is the difference between hard and
-" soft wrap
+" set wrap " text wrapping, difference between hard and soft?
 " set textwidth=79 " related to word wrap
 " set formatoptions=qrn1 "related to word wrap
 "
@@ -258,8 +259,7 @@ vnoremap ~ y:call setreg('', TwiddleCase(@"), getregtype(''))<CR>gv""Pgv
 " set viminfo+=n$VIM/_viminfo
 "
 " set copyindent " copy previous indention on autoindenting
-" set smarttab "  tabs on start of line according to shiftwidth not
-" tabstop
+" set smarttab " tabs on start of line according to shiftwidth not tabstop
 " set title
 "
 " highlight OverLength ctermbg=darkgreen ctermfg=white guibg=orange guifg=white
