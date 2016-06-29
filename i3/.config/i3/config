@@ -39,7 +39,7 @@ bindsym $mod+q kill
 # bindsym $mod+d exec dmenu_run -fn "DejaVu Sans Mono-18" -l 4 -i -nb "#073646" -p ">"
 
 # start rofi
-bindsym $mod+d exec rofi -show run -opacity "80" -hide-scrollbar -font "DejaVu Sans Mono 18" -bg "#222222" -fg "#ffffff" -hlbg "#383838" hlfg "#ffffff" -line-margin "15" -separator-style "none" -lines "5"
+bindsym $mod+d exec rofi -show run -opacity "75" -hide-scrollbar -font "DejaVu Sans Mono 24" -bg "#222222" -fg "#ffffff" -hlbg "#383838" hlfg "#ffffff" -line-margin "24" -separator-style "none" -lines "5"
 
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
