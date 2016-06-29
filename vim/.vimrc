@@ -1,17 +1,17 @@
 " ======================================
 "
 " Jeff Gaecke
-" First created on 2015-11-10
+" 2015-11-10
 "
 " Readme
 "       Installation Instructions
-"               install git
-"               clone to ~/dotfiles
-"               install vundle as per official doc
-"               make ~/.vim/tmp
-"               Stow for symlinking
-"               open vim, then :PluginInstall
-"               source ~/.vimrc
+"           install git
+"           clone to ~/dotfiles
+"           install vundle as per official doc
+"           make ~/.vim/tmp
+"           Stow for symlinking
+"           open vim, then :PluginInstall
+"           source ~/.vimrc
 "       Note differences in win and *nix filepaths
 " Contents
 "       Vundle bootstrap
@@ -23,8 +23,9 @@
 "       Old config
 " Notes
 "       <C-o> and <C-i> to jump back and forth, excluding hjkl
+"       use marks to navigate
 "       text folding
-"       split right <C-v>, split down <C-s>
+"       split right <C-w>v, split down <C-w>s
 "       comment a paragraph gcap
 "       {} to navigate paragraphs, () for sentences
 "       use relative numbers + jk for faster scrolling
@@ -105,6 +106,9 @@ filetype plugin indent on    " required
 " ======================================
 set encoding=utf-8 " utf-8 encoding is most common the web
 set hidden " hides unsaved buffer instead of quit
+set nocompatible " remove backward compatibility with vi
+set modelines=0 " removes security exploit with modelines
+set gdefault " global substitution instead of first occurence
 filetype indent on " loads filetype specific indent files /.vim/indent/
 set expandtab " tabs are spaces
 set tabstop=4 " number of spaces per tab
@@ -239,9 +243,6 @@ vnoremap ~ y:call setreg('', TwiddleCase(@"), getregtype(''))<CR>gv""Pgv
 
 " Old config
 " ======================================
-" set nocompatible " remove backward compatibility with vi
-" set modelines=0 " removes security exploit with modelines
-" set gdefault " global substitution instead of first occurence
 " au FocusLost * :wa " save on focus lost, like when tabbing away
 "
 " The following remaps such that \v is prefext every search query (regex)
