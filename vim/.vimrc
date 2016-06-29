@@ -242,11 +242,9 @@ vnoremap ~ y:call setreg('', TwiddleCase(@"), getregtype(''))<CR>gv""Pgv
 " set nocompatible " remove backward compatibility with vi
 " set modelines=0 " removes security exploit with modelines
 " set gdefault " global substitution instead of first occurence
-
 " au FocusLost * :wa " save on focus lost, like when tabbing away
 "
-" The following remaps such that \v is prefext every search query
-" (regex)
+" The following remaps such that \v is prefext every search query (regex)
 " noremap / /\v
 " vnoremap / /\v
 "
@@ -262,14 +260,3 @@ vnoremap ~ y:call setreg('', TwiddleCase(@"), getregtype(''))<CR>gv""Pgv
 " set copyindent " copy previous indention on autoindenting
 " set smarttab " tabs on start of line according to shiftwidth not tabstop
 " set title
-"
-" highlight OverLength ctermbg=darkgreen ctermfg=white guibg=orange guifg=white
-" match OverLength /\%81v.\+/ " highlight 81st character
-"
-" Trailing whitespaces and whitespace after TAB are highlight
-" highlight ExtraWhitespace ctermbg=darkgreen guibg=lightgreen
-" match ExtraWhitespace /\s\+$\| \+\ze\t/
-"
-" highlights only the 81st character not the >=81 characters
-" highlight ColorColumn ctermbg=DarkCyan ctermfg=white guibg=orange guifg=white
-" call matchadd('ColorColumn', '\%81v', 100)
