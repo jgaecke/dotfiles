@@ -22,6 +22,7 @@
 "       Vim functions
 "       Old config
 " Notes
+"       <C-o> and <C-i> to jump back and forth, excluding hjkl
 "       text folding
 "       split right <C-v>, split down <C-s>
 "       comment a paragraph gcap
@@ -209,7 +210,7 @@ nnoremap <leader>dd "+dd
 
 " Plugin settings
 " ======================================
-nnoremap <C-o> :NERDTreeToggle <CR>
+nnoremap <C-n> :NERDTreeToggle <CR>
 nnoremap <leader>u :UndotreeToggle<CR>
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme='base16_tomorrow'
