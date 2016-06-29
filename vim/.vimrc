@@ -190,9 +190,6 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 nnoremap <tab> %
 vnoremap <tab> %
-nnoremap 9 $
-vnoremap 9 $
-inoremap 9 $
 nnoremap + g_
 vnoremap + g_
 inoremap + g_
