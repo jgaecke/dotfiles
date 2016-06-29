@@ -141,7 +141,6 @@ set completeopt=menu,preview "autocomplete window behavior
 colorscheme hybrid
 set background=dark "necesarry for colorschemes with two versions
 syntax enable " enable syntax highlighting
-winpos 0 0 " start gui window in top left corner, no negatives
 set ruler " display line and column number in bottom ruler
 set number " display the line number
 set relativenumber " display relative to cursor not absolute
@@ -157,6 +156,7 @@ set splitright " splits open on the right
 " execute "set colorcolumn=" . join(range(81,335), ',')
 set colorcolumn=81 " single grey column on column 81
 if has("gui_running")
+    winpos 0 0 " start gui window in top left corner, no negatives
     " set lines=250 columns=85 " size of initial window
     set guioptions-=T " remove toolbar
     set background=dark
@@ -190,6 +190,12 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 nnoremap <tab> %
 vnoremap <tab> %
+nnoremap 9 $
+vnoremap 9 $
+inoremap 9 $
+nnoremap + g_
+vnoremap + g_
+inoremap + g_
 " buffers
 nnoremap <leader>t :enew<CR>
 nnoremap <leader>x :bdelete<CR>
