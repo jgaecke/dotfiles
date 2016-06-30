@@ -12,8 +12,12 @@
 #           i3-gaps
 #           Shutdown Restart mode
 # TODO
-#           use variable for colors
+#           use variable for colors, easier changes
 #           make background photo reference general, copy photo into /i3/
+#           i3blocks or lemonbar for more advanced status
+#           i3lock-colors plus i3lock-fancy
+#           xautomod for idle time to lock screen
+#           learn more about compiz
 
 # ======================================
 
