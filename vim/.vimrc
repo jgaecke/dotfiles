@@ -85,7 +85,7 @@ Plugin 'tomasr/molokai' " revised version, let g:rehash256 = 1
 Plugin 'sjl/badwolf' " gui
 " syntastic
 " vim-surround
-" ack.vim
+" ag.vim can be used with CtrlP to speed up fuzzy file search
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -182,7 +182,7 @@ let mapleader="\<space>"
 inoremap jk <esc>
 nnoremap j gj
 nnoremap k gk
-nnoremap <S-Enter> O<Esc>
+nnoremap <S-enter> O<Esc>
 nnoremap <CR> o<Esc>
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
@@ -217,10 +217,13 @@ nnoremap <leader>dd "+dd
 
 " Plugin settings
 " ======================================
-nnoremap <C-n> :NERDTreeToggle <CR>
+nnoremap <leader>n :NERDTreeToggle <CR>
+nnoremap <leader>f :CtrlP<CR>
 nnoremap <leader>u :UndotreeToggle<CR>
-let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme='base16_tomorrow'
+let g:airline#extensions#tabline#enabled = 1
+let g:ctrlp_switch_buffer = 0 " always open files in new buffer
+
 " need to install powerline for the following to work
 " let g:airline_powerline_fonts = 1
 " not sure what this does
@@ -256,11 +259,40 @@ vnoremap ~ y:call setreg('', TwiddleCase(@"), getregtype(''))<CR>gv""Pgv
 " set textwidth=79 " related to word wrap
 " set formatoptions=qrn1 "related to word wrap
 "
-" save session, reopen with vim -S
-" nnoremap <leader>s :mksession<CR>
+" save session, reopen with vim -S ~/.vim/tmp/session.vim<CR>
+" nnoremap <leader>ms :mksession! ~/.vim/tmp/session.vim<CR>
 "
 " set viminfo+=n$VIM/_viminfo
 "
 " set copyindent " copy previous indention on autoindenting
 " set smarttab " tabs on start of line according to shiftwidth not tabstop
 " set title
+
+" " Autogroups
+" ======================================
+" this autogroup executes only once, language specific settings
+" augroup configgroup
+"     autocmd!
+"     autocmd VimEnter * highlight clear SignColumn
+"     autocmd BufWritePre *.php,*.py,*.js,*.txt,*.hs,*.java,*.md
+"                 \:call <SID>StripTrailingWhitespaces()
+"     autocmd FileType java setlocal noexpandtab
+"     autocmd FileType java setlocal list
+"     autocmd FileType java setlocal listchars=tab:+\ ,eol:-
+"     autocmd FileType java setlocal formatprg=par\ -w80\ -T4
+"     autocmd FileType php setlocal expandtab
+"     autocmd FileType php setlocal list
+"     autocmd FileType php setlocal listchars=tab:+\ ,eol:-
+"     autocmd FileType php setlocal formatprg=par\ -w80\ -T4
+"     autocmd FileType ruby setlocal tabstop=2
+"     autocmd FileType ruby setlocal shiftwidth=2
+"     autocmd FileType ruby setlocal softtabstop=2
+"     autocmd FileType ruby setlocal commentstring=#\ %s
+"     autocmd FileType python setlocal commentstring=#\ %s
+"     autocmd BufEnter *.cls setlocal filetype=java
+"     autocmd BufEnter *.zsh-theme setlocal filetype=zsh
+"     autocmd BufEnter Makefile setlocal noexpandtab
+"     autocmd BufEnter *.sh setlocal tabstop=2
+"     autocmd BufEnter *.sh setlocal shiftwidth=2
+"     autocmd BufEnter *.sh setlocal softtabstop=2
+" augroup END
