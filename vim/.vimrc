@@ -29,8 +29,9 @@
 "       comment a paragraph gcap
 "       {} to navigate paragraphs, () for sentences
 "       use relative numbers + jk for faster scrolling
-" todo
-"       learn and incorporate tmux
+" TODO
+"       learn and incorporate Tmux
+"       explore undoTree
 "
 " ======================================
 
@@ -156,7 +157,7 @@ set splitright " splits open on the right
 " execute "set colorcolumn=" . join(range(81,335), ',')
 set colorcolumn=81 " single grey column on column 81
 if has("gui_running")
-    winpos 0 0 " start gui window in top left corner, no negatives
+    " winpos 0 0 " start gui window in top left corner, no negatives
     " set lines=250 columns=85 " size of initial window
     set guioptions-=T " remove toolbar
     set background=dark
