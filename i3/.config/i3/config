@@ -249,9 +249,9 @@ bindsym $mod+Shift+Tab move container to workspace next
 workspace_auto_back_and_forth yes
 
 # Pulse Audio controls alsamixer is an alternative, set-sink-volume 0(1)
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% && pactl set-sink-mute 1 0
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% && pactl set-sink-mute 1 0
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 1 +5% && pactl set-sink-mute 1 0
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 1 -5% && pactl set-sink-mute 1 0
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 1 toggle
 
 # Sreen brightness controls
 bindsym XF86MonBrightnessUp exec xbacklight -inc 20
