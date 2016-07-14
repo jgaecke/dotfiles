@@ -56,18 +56,27 @@
 
 # Visual Config
 # ======================================
-font pango:DejaVu Sans 10
+font pango:DejaVu Sans 10.5
 
 # setting desktop background
 exec_always --no-startup-id feh --bg-scale ~/background.jpg
 
-# Colors
-set $solardarkblue      #00002b36
+# solarized colors
+set $solardarkblue      #002b36
 set $solarlightblue     #268bd2
+set $solargrey          #eee8d5
+set $solarred           #dc322f
+
+# generic colors
 set $white              #FFFFFF
 set $black              #000000
 set $grey               #222222
-set $solargrey          #eee8d5
+
+# taken from reddit
+set $lightblue          #5294e2
+set $darkblue           #2f343f
+set $red                #E53935
+set $border             #f3f4f5
 
 bar {
     status_command i3status
@@ -75,14 +84,17 @@ bar {
     tray_output none # icon output to main display (none|primary)
     i3bar_command i3bar -t
     colors {
-        background      $solardarkblue
-        statusline      $white
-        # separator     #dc322f # red line between elements
-
+        # prepend 00 to hex for full transparency
+        background         $darkblue
+        statusline         $white
+        # separator          $white
         # class            border           bg              text
-        focused_workspace  $solardarkblue   $solardarkblue  $white
-        inactive_workspace $solardarkblue   $solardarkblue  $solarlightblue
+        focused_workspace  $lightblue       $lightblue      $white
+        inactive_workspace $darkblue        $darkblue       $white
+        urgent_workspace   #d33682          #d33682         #fdf6e3
+        active_workspace   #fdf6e3          #6c71c4         #fdf6e3
 
+        # Solarized Color Theme
         # focused_workspace  #fdf6e3 #859900 #fdf6e3
         # active_workspace   #fdf6e3 #6c71c4 #fdf6e3
         # inactive_workspace #586e75 #93a1a1 #002b36
@@ -90,12 +102,19 @@ bar {
     }
 }
 
-# Container colors
-# class                 #border     #bg          #text        #indicator
-client.focused          #657b83     #657b83      #fdf6e3      #657b83
-client.focused_inactive #073642     #073642      #eee8d5      #6c71c4
-client.unfocused        #073642     #073642      #93a1a1      #586e75
-client.urgent           #d33682     #d33682      #fdf6e3      #dc322f
+# Container Colors
+# class                 #border       #bg          #text        #indicator
+client.focused          $lightblue    $lightblue   $white       $white
+client.focused_inactive $darkblue     $darkblue    $white       $white
+client.unfocused        $darkblue     $darkblue    $white       $white
+client.urgent           #d33682       #d33682      #fdf6e3      #dc322f
+
+# Solarized Container Colors
+# class                   #border     #bg          #text        #indicator
+# client.focused          #657b83     #657b83      #fdf6e3      #657b83
+# client.focused_inactive #073642     #073642      #eee8d5      #6c71c4
+# client.unfocused        #073642     #073642      #93a1a1      #586e75
+# client.urgent           #d33682     #d33682      #fdf6e3      #dc322f
 
 # General key bindings
 # ======================================
@@ -230,7 +249,8 @@ bindsym $mod+r mode "resize"
 # My key bindings
 # ======================================
 # start rofi
-bindsym $mod+d exec rofi -show run -opacity "75" -hide-scrollbar -font "DejaVu Sans 24" -bg "#222222" -fg "#ffffff" -hlbg "#383838" hlfg "#ffffff" -line-margin "24" -separator-style "none" -lines "5"
+# bindsym $mod+d exec rofi -show run -opacity "75" -hide-scrollbar -font "DejaVu Sans 24" -bg "#222222" -fg "#ffffff" -hlbg "#383838" hlfg "#ffffff" -line-margin "24" -separator-style "none" -lines "5"
+bindsym $mod+d exec rofi -show run -opacity "75" -hide-scrollbar -font "DejaVu Sans 24" -bg "$darkblue" -fg "$white" -hlbg "$lightblue" hlfg "$white" -line-margin "24" -separator-style "none" -lines "5"
 
 # mouse movement does not interefere
 focus_follows_mouse no
@@ -290,7 +310,7 @@ gaps inner 10
 for_window [class="^.*"] border pixel 3
 
 # draws borders when multiple containers
-smart_borders on 
+smart_borders on
 
 set $mode_gaps Gaps: (o) outer, (i) inner
 set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
