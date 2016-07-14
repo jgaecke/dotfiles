@@ -213,6 +213,7 @@ nnoremap <leader>v `[v`]
 nnoremap <leader>p "*p
 nnoremap <leader>P "*P
 nnoremap <leader>y "+y
+vnoremap <leader>y "+y
 nnoremap <leader>yy "+yy
 nnoremap <leader>dd "+dd
 
